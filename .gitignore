@@ -21,3 +21,27 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+.idea/
+target/BusParkService-1.0-SNAPSHOT/
+target/BusParkService/META-INF/
+target/BusParkService/WEB-INF/admin/
+target/BusParkService/WEB-INF/classes/META-INF/
+target/BusParkService/WEB-INF/classes/data_base.properties
+target/BusParkService/WEB-INF/classes/lang.properties
+target/BusParkService/WEB-INF/classes/lang_ru.properties
+target/BusParkService/WEB-INF/classes/log4j.properties
+target/BusParkService/WEB-INF/classes/log_msg.properties
+target/BusParkService/WEB-INF/errors/
+target/BusParkService/WEB-INF/guest/
+target/BusParkService/WEB-INF/user/
+target/BusParkService/WEB-INF/web.xml
+target/BusParkService/Welcome.jsp
+target/BusParkService/css/
+target/BusParkService/js/
+target/classes/META-INF/
+target/classes/data_base.properties
+target/classes/lang.properties
+target/classes/lang_ru.properties
+target/classes/log4j.properties
+target/classes/log_msg.properties
+target/generated-sources/
