@@ -2,10 +2,10 @@ package model.entity;
 
 public class Request {
     private Integer id;
-    private Integer user_id;
-    private Integer direction_id;
-    private Integer bus_id;
-    private Boolean is_accept;
+    private Integer userId;
+    private Integer directionId;
+    private Integer busId;
+    private Boolean isAccept;
 
     public Integer getId() {
         return id;
@@ -15,35 +15,35 @@ public class Request {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getDirection_id() {
-        return direction_id;
+    public Integer getDirectionId() {
+        return directionId;
     }
 
-    public void setDirection_id(Integer direction_id) {
-        this.direction_id = direction_id;
+    public void setDirectionId(Integer directionId) {
+        this.directionId = directionId;
     }
 
-    public Integer getBus_id() {
-        return bus_id;
+    public Integer getBusId() {
+        return busId;
     }
 
-    public void setBus_id(Integer bus_id) {
-        this.bus_id = bus_id;
+    public void setBusId(Integer busId) {
+        this.busId = busId;
     }
 
-    public Boolean getIs_accept() {
-        return is_accept;
+    public Boolean getIsAccept() {
+        return isAccept;
     }
 
-    public void setIs_accept(Boolean is_accept) {
-        this.is_accept = is_accept;
+    public void setIsAccept(Boolean isAccept) {
+        this.isAccept = isAccept;
     }
 }

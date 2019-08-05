@@ -5,7 +5,7 @@ public class Direction {
     private Integer distance;
     private String start;
     private String end;
-    private Boolean is_free;
+    private Boolean isFree;
 
     public Integer getId() {
         return id;
@@ -39,11 +39,11 @@ public class Direction {
         this.end = end;
     }
 
-    public Boolean getIs_free() {
-        return is_free;
+    public Boolean getIsFree() {
+        return isFree;
     }
 
-    public void setIs_free(Boolean is_free) {
-        this.is_free = is_free;
+    public void setIsFree(Boolean isFree) {
+        this.isFree = isFree;
     }
 }

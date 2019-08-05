@@ -3,6 +3,7 @@ package model.entity;
 public class Bus {
     private Integer id;
     private String name;
+    private Integer number;
     private Integer numPlaces;
     private Boolean isFree;
 
@@ -16,6 +17,14 @@ public class Bus {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public void setName(String name) {
