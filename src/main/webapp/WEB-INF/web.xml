@@ -18,7 +18,7 @@
 
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/page/*</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -28,7 +28,7 @@
 
     <filter-mapping>
         <filter-name>RoleFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/page/*</url-pattern>
     </filter-mapping>
 
     <filter>

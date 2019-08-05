@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.curLang}"/>
 <fmt:setBundle basename="lang"/>
@@ -14,7 +15,7 @@
 <html>
 <head>
     <title><fmt:message key="error.oops"/></title>
-    <link href="${pageContext.request.contextPath}/css/reg_required.css" type="text/css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/reg_required.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
