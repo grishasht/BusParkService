@@ -1,9 +1,6 @@
 package web;
 
-import controller.command.Command;
-import controller.command.Home;
-import controller.command.Logout;
-import controller.command.RegForward;
+import controller.command.*;
 import model.util.Constants;
 import model.util.LogGenerator;
 import org.apache.log4j.Logger;
@@ -25,8 +22,10 @@ public class MainServlet extends HttpServlet {
     public void init(ServletConfig config) {
 
         commandMap.put("/", new Home());
+        commandMap.put("/login", new Login());
         commandMap.put("/logout", new Logout());
         commandMap.put("/reg_fwd", new RegForward());
+        commandMap.put("/register", new Register());
 
         log.info("Servlet was initted");
         //getServletContext().setAttribute(USER_LIST, new LinkedList<User>());

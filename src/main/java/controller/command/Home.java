@@ -10,13 +10,10 @@ import java.util.Optional;
 public class Home implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        Optional<Object> role = Optional
-                .ofNullable(((User) request.getSession()
-                        .getAttribute(Constants.SESSION_USER))
-                        .getRole());
+        Optional<User> role = Optional.ofNullable((User)request.getSession().getAttribute(Constants.SESSION_USER));
 
-        return role.map(o -> "forward:/WEB-INF/" + o.toString() + "/index.jsp" +
-                (request.getQueryString() == null ? "" : "?" + request.getQueryString()))
-                .orElse("forward:/login");
+        System.out.println(request.getQueryString());
+        return "forward:/WEB-INF/" + role.orElse(User.getGuest()).getRole().toString() + "/index.jsp"
+                + "?curLang=" + request.getSession().getAttribute(Constants.CUR_LANG);
     }
 }
