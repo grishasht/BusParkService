@@ -19,6 +19,6 @@ public class Logout implements Command {
         String curLang = (String) request.getSession().getAttribute(Constants.CUR_LANG);
         log.info("User " + user.getEmail() + " logged out");
 
-        return "redirect:/page/?curLang=" + curLang;
+        return "redirect:" + request.getContextPath() + "/page/?curLang=" + curLang;
     }
 }

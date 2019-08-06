@@ -22,11 +22,14 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active" style="width: 250px">
-                <a class="nav-link" href="/page/"><h3><fmt:message key="header.yourdelivery"/></h3>
+                <a class="nav-link" href="${pageContext.request.contextPath}/page/"><h3><fmt:message
+                        key="header.yourdelivery"/></h3>
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/page/service?curLang=${sessionScope.curLang}"><fmt:message key="header.service"/></a>
+                <a class="nav-link"
+                   href="${pageContext.request.contextPath}/page/service?curLang=${sessionScope.curLang}"><fmt:message
+                        key="header.service"/></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"

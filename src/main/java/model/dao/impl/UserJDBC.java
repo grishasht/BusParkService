@@ -56,7 +56,7 @@ public class UserJDBC extends JDBC implements Dao<User> {
                 while (resultSet.next()) {
                     users.add((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6));
                 }
-                log.debug(properties.getProperty("RES_SET_CLOSE") + "in UserJDBC");
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in UserJDBC readAll");
             }
             log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC readAll");
 

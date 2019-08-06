@@ -13,9 +13,12 @@ public class JDBC {
     protected Properties properties = new Properties();
     protected Connection connection;
 
+    private static final String LOG_MSG_PROPERTIES =
+            "/home/hs/Desktop/GitHub/BusParkService/src/main/resources/log_msg.properties";
+
     {
         try {
-            properties.load(new FileInputStream("src/main/resources/log_msg.properties"));
+            properties.load(new FileInputStream(LOG_MSG_PROPERTIES));
         } catch (IOException e) {
             log.error(properties.getProperty("FILE_NOT_FOUND") + "in JDBC");
         }
