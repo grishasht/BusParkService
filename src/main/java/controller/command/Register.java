@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,12 +27,18 @@ public class Register implements Command {
         String email = request.getParameter(Constants.EMAIL);
         String password = request.getParameter(Constants.PASSWORD);
         String confirmPassword = request.getParameter(Constants.CONFIRM_PASSWORD);
+        String age = request.getParameter(Constants.USR_AGE);
 
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
         user.setRole(Role.DRIVER);
         user.setLogin(name);
+        try {
+            user.setAge(Integer.valueOf(age));
+        } catch (Exception e){
+            return "forward:/WEB-INF/errors/inv_input.jsp";
+        }
 
         String validationInputErr = userService.validationInputErr(user, resourceBundle);
         String userPresentError = userService.userPresentError(user, resourceBundle);
@@ -51,8 +58,10 @@ public class Register implements Command {
             log.info("User " + user.getEmail() + " authorized");
         }
 
-        System.out.println(user.toString());
+//        System.out.println(user.toString());
 
-        return "forward:/Welcome.jsp";
+        return "redirect:" + request.getContextPath() + "/page/?curLang="
+                + request.getSession().getAttribute(Constants.CUR_LANG);
+//        return "forward:/Welcome.jsp";
     }
 }

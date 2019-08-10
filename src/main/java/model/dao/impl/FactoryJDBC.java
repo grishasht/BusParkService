@@ -1,7 +1,6 @@
 package model.dao.impl;
 
-import model.dao.Dao;
-import model.dao.DaoFactory;
+import model.dao.*;
 import model.entity.Bus;
 import model.entity.Direction;
 import model.entity.Request;
@@ -13,22 +12,22 @@ import java.sql.SQLException;
 public class FactoryJDBC extends DaoFactory {
 
     @Override
-    public Dao<User> createUserDao() {
+    public UserDao createUserDao() {
         return new UserJDBC(getConnection());
     }
 
     @Override
-    public Dao<Direction> createDirectionDao() {
+    public DirectionDao createDirectionDao() {
         return new DirectionJDBC(getConnection());
     }
 
     @Override
-    public Dao<Request> createRequestDao() {
+    public RequestDao createRequestDao() {
         return new RequestJDBC(getConnection());
     }
 
     @Override
-    public Dao<Bus> createBusDao() {
+    public BusDao createBusDao() {
         return new BusJDBC(getConnection());
     }
 

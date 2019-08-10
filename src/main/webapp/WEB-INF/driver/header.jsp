@@ -12,52 +12,46 @@
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.curLang}"/>
-<fmt:setBundle basename="lang"/>
+<fmt:setBundle basename="lang" var="lang"/>
 <jsp:useBean id="getParams" scope="page" class="java.lang.String"/>
 
-<script src="${pageContext.request.contextPath}/js/signAjax.js"></script>
 <script src="${pageContext.request.contextPath}/js/post.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active" style="width: 250px">
-                <a class="nav-link" href="${pageContext.request.contextPath}/page/"><h3><fmt:message
-                        key="header.yourdelivery"/></h3>
+        <div class="navbar-nav" style="width: 90%">
+            <div class="nav-item active" style="width: 250px">
+                <a class="nav-link" href="${pageContext.request.contextPath}/page/"><h3>
+                    <fmt:message key="header.bus.park" bundle='${lang}'/></h3>
                     <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
+            </div>
+            <div class="nav-item">
                 <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/service?curLang=${sessionScope.curLang}"><fmt:message
-                        key="header.service"/></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/my_requests?curLang=${sessionScope.curLang}"><fmt:message
-                        key="header.my.requests"/></a>
-            </li>
-            <li class="nav-item dropdown">
+                   href="${pageContext.request.contextPath}/page/cabinet?curLang=${sessionScope.curLang}">
+                    <fmt:message key="header.cabinet" bundle='${lang}'/></a>
+            </div>
+            <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <fmt:message key="header.language"/>
+                    <fmt:message key="header.language" bundle='${lang}'/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'en'))}"
-                       href="#"><fmt:message key="locale.english"/></a>
+                       href="#"><fmt:message key="locale.english" bundle='${lang}'/></a>
                     <a class="dropdown-item" onclick="{return renewPage(setGetParam('curLang', 'ru'))}"
-                       href="#"><fmt:message key="locale.russian"/></a>
+                       href="#"><fmt:message key="locale.russian" bundle='${lang}'/></a>
                 </div>
-            </li>
-            <li class="nav-item mybutton">
+            </div>
+            <div class="nav-item mybutton logout-right">
                 <a class="btn nav-link rounded"
-                   href="${pageContext.request.contextPath}/page/logout?curLang=${sessionScope.curLang}"><fmt:message
-                        key="header.form.logout"/></a>
-            </li>
-            <li class="nav-item mybutton">
+                   href="${pageContext.request.contextPath}/page/logout?curLang=${sessionScope.curLang}">
+                    <fmt:message key="header.form.logout" bundle='${lang}'/></a>
+            </div>
+            <div class="nav-item mybutton sign-up-right">
                 <a class="btn nav-link rounded singup"
-                   href="${pageContext.request.contextPath}/page/reg_fwd?curLang=${sessionScope.curLang}"><fmt:message
-                        key="header.form.signup"/></a>
-            </li>
-        </ul>
+                   href="${pageContext.request.contextPath}/page/reg_fwd?curLang=${sessionScope.curLang}">
+                    <fmt:message key="header.form.signup" bundle='${lang}'/></a>
+            </div>
+        </div>
     </div>
 </nav>

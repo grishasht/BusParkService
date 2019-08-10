@@ -10,6 +10,7 @@ public class User {
     private String email;
     private String login;
     private String password;
+    private Integer age;
     private Role role;
 
     public static User getGuest(){
@@ -21,8 +22,17 @@ public class User {
         user.setEmail("");
         user.setRole(Role.GUEST);
         user.setId(0);
+        user.setAge(0);
 
         return user;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Role getRole() {

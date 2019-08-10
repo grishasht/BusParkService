@@ -16,8 +16,8 @@
 <html>
 <head>
     <title><fmt:message key="register.registration"/></title>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 </head>
@@ -29,35 +29,28 @@
         <div class="form-group">
             <label for="inputEmail1"><fmt:message key="register.email"/></label>
             <input name="email"
-                   type="email" class="form-control mr-sm-2" id="inputEmail1" aria-describedby="emailHelp"
-                   placeholder="<fmt:message key="register.enter.email"/>" required/>
+                   type="email" class="form-control m-md-2" id="inputEmail1" aria-describedby="emailHelp"
+                   placeholder="<fmt:message key="register.enter.email"/>" required>
         </div>
         <div class="form-group">
             <label for="inputUsername"><fmt:message key="register.name"/></label>
             <input name="username"
-                   type="text" class="form-control mr-sm-2" id="inputUsername" aria-describedby="usernameHelp"
-                   placeholder="<fmt:message key="register.enter.name"/>" required/>
-        </div>
-        <div class="form-group">
-            <label for="inputAge"><fmt:message key="register.age"/></label>
-            <input name="userage"
-                   type="text" class="form-control mr-sm-2" id="inputAge" aria-describedby="usernameHelp"
-                   placeholder="<fmt:message key="register.enter.age"/>" required/>
+                   type="text" class="form-control m-md-2" id="inputUsername" aria-describedby="usernameHelp"
+                   placeholder="<fmt:message key="register.enter.name"/>" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1"><fmt:message key="register.password"/></label>
             <input name="password"
-                   type="password" class="form-control mr-sm-2" id="exampleInputPassword1"
-                   placeholder="<fmt:message key="register.enter.password"/>" required/>
+                   type="password" class="form-control m-md-2" id="exampleInputPassword1"
+                   placeholder="<fmt:message key="register.enter.password"/>" required>
         </div>
         <div class="form-group">
             <label for="exampleInputConfirmPassword"><fmt:message key="register.confirm.password"/></label>
-            <input name="confirmPassword" type="password" class="form-control mr-sm-2" id="exampleInputConfirmPassword"
-                   placeholder="<fmt:message key="register.enter.password"/>" required/>
+            <input name="confirmPassword"
+                   type="password" class="form-control m-md-2" id="exampleInputConfirmPassword"
+                   placeholder="<fmt:message key="register.enter.password"/>" required>
         </div>
-        <button type="submit" class="btn btn-primary"
-                name="curLang" value="${sessionScope.curLang}"
-                formaction="${pageContext.request.contextPath}/page/register">
+        <button type="submit" class="btn btn-primary" formaction="${pageContext.request.contextPath}/page/register">
             <fmt:message key="register.submit"/>
         </button>
     </form>

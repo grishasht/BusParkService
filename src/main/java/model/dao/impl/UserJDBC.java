@@ -1,6 +1,7 @@
 package model.dao.impl;
 
 import model.dao.Dao;
+import model.dao.UserDao;
 import model.dao.mappers.Mapper;
 import model.dao.mappers.UserMapper;
 import model.entity.User;
@@ -12,15 +13,15 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserJDBC extends JDBC implements Dao<User> {
+public class UserJDBC extends JDBC implements UserDao {
     public UserJDBC(Connection connection) {
         super(connection);
     }
 
     @Override
     public void create(User entity) {
-        String query = "INSERT INTO users(login, password, name, email, role) " +
-                " VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users(login, password, name, email, role, age) " +
+                " VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             System.out.println(connection.toString());
@@ -31,6 +32,7 @@ public class UserJDBC extends JDBC implements Dao<User> {
             preparedStatement.setString(3, entity.getName());
             preparedStatement.setString(4, entity.getEmail());
             preparedStatement.setString(5, entity.getRole().toString());
+            preparedStatement.setInt(6, entity.getAge());
             preparedStatement.execute();
 
             log.info(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC creating");
@@ -54,7 +56,7 @@ public class UserJDBC extends JDBC implements Dao<User> {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in UserJDBC readAll");
 
                 while (resultSet.next()) {
-                    users.add((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6));
+                    users.add((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in UserJDBC readAll");
             }
@@ -65,11 +67,6 @@ public class UserJDBC extends JDBC implements Dao<User> {
         }
 
         return users;
-    }
-
-    @Override
-    public User readById(int id) {
-        return null;
     }
 
     @Override

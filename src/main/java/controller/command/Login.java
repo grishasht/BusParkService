@@ -21,13 +21,10 @@ public class Login implements Command {
 
         User user = userService.identifyUser(login, password);
 
-        if (!User.getGuest().equals(user)) {
-            userService.authorize(user, request);
-            log.info("User " + user.getEmail() + " authorized");
-            return "forward:/Welcome.jsp";
-        } else {
-            return "redirect:" + request.getContextPath() + "/page/?curLang="
-                    + request.getSession().getAttribute(Constants.CUR_LANG);
-        }
+        userService.authorize(user, request);
+        log.info("User " + user.getEmail() + " authorized");
+        return "redirect:" + request.getContextPath() + "/page/?curLang="
+                + request.getSession().getAttribute(Constants.CUR_LANG);
+
     }
 }

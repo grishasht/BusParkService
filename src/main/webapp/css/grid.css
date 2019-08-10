@@ -1,49 +1,86 @@
 .wrap {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     grid-auto-rows: auto;
 }
 
-.user-container {
+body {
+    background-color: #EEEEEF;
 }
 
-.bat-dest {
+.dist-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: auto;
+    border: #9fcdff 1px inset;
+    border-radius: 7%;
+    background-color: snow;
+}
+
+.start-point {
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 7;
-    grid-row-end: 8;
+    grid-row: 1;
 }
 
-.address-box {
+.end-point {
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row: 2;
 }
 
-.luggage-box {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
-}
-
-.crt-req-btn {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 3;
-    grid-row-end: 4;
-}
-
-.request-box {
+.distance {
     grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 4;
+    grid-row: 1;
 }
 
-.req-pos {
-    margin: 10% 20% 30% 20%;
+.free {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2;
+}
+
+.guest-body-instr {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin: 30% 20%;
+}
+
+.guest-body-login {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 30%;
+    margin: auto;
+    background-color: #b3d7ff;
+    border-radius: 5%;
+}
+
+.admin-directions {
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+}
+
+.admin-drivers {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.form-elem {
+    margin: 5%;
+}
+
+.sign-up-right {
+    position: absolute;
+    right: 0;
+    margin-right: 10%;
+}
+
+.logout-right {
+    position: absolute;
+    right: 0;
+    margin-right: 25%;
 }
 
 .btn-size {
