@@ -1,6 +1,7 @@
 package model.dao.impl;
 
 import model.dao.Dao;
+import model.dao.RequestDao;
 import model.entity.Request;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class RequestJDBC extends JDBC implements Dao<Request> {
+public class RequestJDBC extends JDBC implements RequestDao {
     public RequestJDBC(Connection connection) {
         super(connection);
     }
@@ -37,11 +38,6 @@ public class RequestJDBC extends JDBC implements Dao<Request> {
 
     @Override
     public List<Request> readAll() {
-        return null;
-    }
-
-    @Override
-    public Request readById(int id) {
         return null;
     }
 

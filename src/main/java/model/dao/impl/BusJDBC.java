@@ -1,5 +1,6 @@
 package model.dao.impl;
 
+import model.dao.BusDao;
 import model.dao.Dao;
 import model.dao.mappers.BusMapper;
 import model.dao.mappers.Mapper;
@@ -13,8 +14,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class BusJDBC extends JDBC implements Dao<Bus> {
-    public BusJDBC(Connection connection) {
+public class BusJDBC extends JDBC implements BusDao {
+    BusJDBC(Connection connection) {
         super(connection);
     }
 
@@ -27,7 +28,7 @@ public class BusJDBC extends JDBC implements Dao<Bus> {
             log.info(properties.getProperty("PREP_STAT_OPEN") + "in BusJDBC creating");
 
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setInt(2, entity.getNumber());
+            preparedStatement.setString(2, entity.getNumber());
             preparedStatement.setInt(3, entity.getNumPlaces());
             preparedStatement.setBoolean(4, entity.getFree());
 
@@ -67,32 +68,6 @@ public class BusJDBC extends JDBC implements Dao<Bus> {
     }
 
     @Override
-    public Bus readById(int id) {
-        Bus bus = new Bus();
-        String query = "SELECT * FROM buses WHERE id=" + id;
-        Mapper busMapper = new BusMapper();
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in BusJDBC readAll");
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                log.debug(properties.getProperty("RES_SET_OPEN") + "in BusJDBC readAll");
-
-                while (resultSet.next()) {
-                    bus = (Bus) busMapper.getEntity(resultSet, 1, 2, 3, 4, 5);
-                }
-                log.debug(properties.getProperty("RES_SET_CLOSE") + "in BusJDBC");
-            }
-            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in BusJDBC readAll");
-
-        } catch (SQLException e) {
-            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in BusJDBC");
-        }
-
-        return bus;
-    }
-
-    @Override
     public void update(Bus entity) {
         String query = "UPDATE buses SET name = ?, number = ?, " +
                 "places_num = ?, is_free = ?" +
@@ -103,7 +78,7 @@ public class BusJDBC extends JDBC implements Dao<Bus> {
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in BusJDBC update");
 
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setInt(2, entity.getNumber());
+            preparedStatement.setString(2, entity.getNumber());
             preparedStatement.setInt(3, entity.getNumPlaces());
             preparedStatement.setBoolean(4, entity.getFree());
             preparedStatement.execute();

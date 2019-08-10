@@ -2,6 +2,7 @@ package model.service;
 
 import model.dao.Dao;
 import model.dao.DaoFactory;
+import model.dao.UserDao;
 import model.entity.User;
 import model.util.Constants;
 
@@ -20,7 +21,7 @@ public class UserService {
 
 
     private static DaoFactory daoFactory = DaoFactory.getInstance();
-    private static Dao<User> userDao = daoFactory.createUserDao();
+    private static UserDao userDao = daoFactory.createUserDao();
 
     public void registerUser(User user) {
         userDao.create(user);
@@ -50,17 +51,29 @@ public class UserService {
 
         if (!validateEmail(user.getEmail())){
             error += resourceBundle.getString("email.validation.fail") + "\n";
+            return error;
         }
 
         if (!validateUsername(user.getName())){
             error += resourceBundle.getString("username.validation.fail") + "\n";
+            return error;
         }
 
         if (!validatePassword(user.getPassword())){
             error += resourceBundle.getString("password.validation.fail") + "\n";
+            return error;
+        }
+
+        if (!validateAge(user.getAge())){
+            error += resourceBundle.getString("age.validation.fail");
+            return error;
         }
 
         return error;
+    }
+
+    private boolean validateAge(Integer age) {
+        return age > 0;
     }
 
     public Boolean confirmPassword(String pswd1, String pswd2) {

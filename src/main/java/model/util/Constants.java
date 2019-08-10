@@ -21,4 +21,5 @@ public interface Constants {
     String ACCOUNT_ID = "accId";
     String ACC_CREATE_TIME = "crtTime";
     String ACCOUNT = "account";
+    String USR_AGE = "userage";
 }

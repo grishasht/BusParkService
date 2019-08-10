@@ -26,6 +26,9 @@ public class RoleFilter implements Filter {
         Set<String> guestRef = new HashSet<>();
 
         adminRef.add("/");
+        adminRef.add("/register");
+        adminRef.add("/logout");
+
 
         driverRef.add("/");
         driverRef.add("/reg_fwd");

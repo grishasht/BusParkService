@@ -8,13 +8,13 @@ import model.entity.User;
 
 public abstract class DaoFactory {
 
-    public abstract Dao<User> createUserDao();
+    public abstract UserDao createUserDao();
 
-    public abstract Dao<Direction> createDirectionDao();
+    public abstract DirectionDao createDirectionDao();
 
-    public abstract Dao<Request> createRequestDao();
+    public abstract RequestDao createRequestDao();
 
-    public abstract Dao<Bus> createBusDao();
+    public abstract BusDao createBusDao();
 
     private static class SingletonHolder {
         static final DaoFactory INSTANCE = new FactoryJDBC();

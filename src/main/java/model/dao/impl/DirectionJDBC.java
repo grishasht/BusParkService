@@ -1,6 +1,7 @@
 package model.dao.impl;
 
 import model.dao.Dao;
+import model.dao.DirectionDao;
 import model.dao.mappers.DirectionMapper;
 import model.dao.mappers.Mapper;
 import model.entity.Direction;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DirectionJDBC extends JDBC implements Dao<Direction> {
+public class DirectionJDBC extends JDBC implements DirectionDao {
     public DirectionJDBC(Connection connection) {
         super(connection);
     }
@@ -63,32 +64,6 @@ public class DirectionJDBC extends JDBC implements Dao<Direction> {
         }
 
         return directions;
-    }
-
-    @Override
-    public Direction readById(int id) {
-        Direction direction = new Direction();
-        String query = "SELECT * FROM directions WHERE id=" + id;
-        Mapper busMapper = new DirectionMapper();
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in DirectionJDBC readAll");
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                log.debug(properties.getProperty("RES_SET_OPEN") + "in DirectionJDBC readAll");
-
-                while (resultSet.next()) {
-                    direction = (Direction) busMapper.getEntity(resultSet, 1, 2, 3, 4, 5);
-                }
-                log.debug(properties.getProperty("RES_SET_CLOSE") + "in DirectionJDBC");
-            }
-            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in DirectionJDBC readAll");
-
-        } catch (SQLException e) {
-            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in DirectionJDBC");
-        }
-
-        return direction;
     }
 
     @Override

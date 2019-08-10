@@ -3,7 +3,7 @@ package model.entity;
 public class Bus {
     private Integer id;
     private String name;
-    private Integer number;
+    private String number;
     private Integer numPlaces;
     private Boolean isFree;
 
@@ -19,11 +19,11 @@ public class Bus {
         return name;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
