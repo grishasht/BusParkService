@@ -16,6 +16,7 @@ public class BusMapper implements Mapper<Bus> {
             bus.setNumber(resultSet.getString(index[2]));
             bus.setNumPlaces(resultSet.getInt(index[3]));
             bus.setFree(resultSet.getBoolean(index[4]));
+            bus.setUserId(resultSet.getInt(index[5]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

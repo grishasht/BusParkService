@@ -27,13 +27,8 @@
             </div>
             <div class="nav-item">
                 <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/service?curLang=${sessionScope.curLang}">
-                    <fmt:message key="header.service" bundle='${lang}'/></a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link"
-                   href="${pageContext.request.contextPath}/page/my_requests?curLang=${sessionScope.curLang}">
-                    <fmt:message key="header.my.requests" bundle='${lang}'/></a>
+                   href="${pageContext.request.contextPath}/page/manage_buses?curLang=${sessionScope.curLang}">
+                    <fmt:message key="header.buses" bundle='${lang}'/></a>
             </div>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"

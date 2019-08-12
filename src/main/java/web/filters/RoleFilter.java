@@ -28,6 +28,11 @@ public class RoleFilter implements Filter {
         adminRef.add("/");
         adminRef.add("/register");
         adminRef.add("/logout");
+        adminRef.add("/manage_buses");
+        adminRef.add("/load_drct");
+        adminRef.add("/buses/load_bs");
+        adminRef.add("/buses/choose_driver");
+        adminRef.add("/routes/choose_bus");
 
 
         driverRef.add("/");

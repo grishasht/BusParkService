@@ -20,6 +20,8 @@ public class UserMapper implements Mapper<User> {
             user.setEmail(resultSet.getString(index[4]));
             String role = resultSet.getString(index[5]);
             Optional.ofNullable(role).ifPresent(a -> user.setRole(Role.contains(role)));
+            user.setAge(resultSet.getInt(index[6]));
+            user.setFree(resultSet.getBoolean(index[7]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

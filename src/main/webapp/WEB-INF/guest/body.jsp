@@ -17,7 +17,7 @@
         <h1><fmt:message key="guest.body.welcome"/></h1>
         <h3><fmt:message key="guest.body.instr"/></h3>
     </div>
-    <div class="guest-body-login" style="width: 50%">
+    <div class="guest-body-login" style="width: 50%; margin: auto">
         <form class="form-inline" method="post">
             <div class="form-group">
                 <label class="form-elem" for="inputLogin"><fmt:message key="header.form.login"/></label><br>

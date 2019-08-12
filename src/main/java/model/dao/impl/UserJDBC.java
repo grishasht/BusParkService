@@ -20,8 +20,8 @@ public class UserJDBC extends JDBC implements UserDao {
 
     @Override
     public void create(User entity) {
-        String query = "INSERT INTO users(login, password, name, email, role, age) " +
-                " VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users(login, password, name, email, role, age, is_free) " +
+                " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             System.out.println(connection.toString());
@@ -33,6 +33,7 @@ public class UserJDBC extends JDBC implements UserDao {
             preparedStatement.setString(4, entity.getEmail());
             preparedStatement.setString(5, entity.getRole().toString());
             preparedStatement.setInt(6, entity.getAge());
+            preparedStatement.setBoolean(7, entity.getFree());
             preparedStatement.execute();
 
             log.info(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC creating");
@@ -56,7 +57,7 @@ public class UserJDBC extends JDBC implements UserDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in UserJDBC readAll");
 
                 while (resultSet.next()) {
-                    users.add((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7));
+                    users.add((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in UserJDBC readAll");
             }
@@ -71,7 +72,24 @@ public class UserJDBC extends JDBC implements UserDao {
 
     @Override
     public void update(User entity) {
-        throw new UnsupportedOperationException();
+        String query = "UPDATE users SET name = ?, age = ?, is_free = ?" +
+                " WHERE id = " + entity.getId();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC update");
+
+            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setInt(2, entity.getAge());
+            preparedStatement.setBoolean(3, entity.getFree());
+            preparedStatement.execute();
+
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC update");
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC update");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in UserJDBC");
+        }
     }
 
     @Override
@@ -92,7 +110,59 @@ public class UserJDBC extends JDBC implements UserDao {
     }
 
     @Override
-    public void close() throws Exception {
+    public List<User> getDrivers() {
+        List<User> users = new LinkedList<>();
+        String query = "SELECT * FROM users where role='driver'";
+        Mapper userMapper = new UserMapper();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC getDrivers");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in UserJDBC getDrivers");
+
+                while (resultSet.next()) {
+                    users.add((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in UserJDBC getDrivers");
+            }
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC getDrivers");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in UserJDBC");
+        }
+
+        return users;
+    }
+
+    @Override
+    public User readById(int id) {
+        User user = null;
+        String query = "SELECT * FROM users where id=" + id;
+        Mapper userMapper = new UserMapper();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in UserJDBC readByID");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in UserJDBC readByID");
+
+                while (resultSet.next()) {
+                    user = ((User) userMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in UserJDBC readByID");
+            }
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in UserJDBC readByID");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in UserJDBC");
+        }
+
+        return user;
+    }
+
+    @Override
+    public void close() {
         try {
             connection.close();
             log.debug(properties.getProperty("CONN_CLOSE") + "in UserJDBC");
