@@ -9,17 +9,9 @@ public interface Constants {
     String EMAIL = "email";
     String PASSWORD = "password";
     String CONFIRM_PASSWORD = "confirmPassword";
-    String LUG_TYPE = "lugType";
-    String LUG_WEIGHT = "lugWeight";
-    String STREET_NAME = "street";
-    String HOUSE_NUM = "houseNum";
-    String COUNTRY_NAME = "country";
-    String CITY_NAME = "city";
-    String SHOW_REQ = "showReq";
-    String REQ_ID = "reqId";
-    String TOTAL_PRICE = "totPrice";
-    String ACCOUNT_ID = "accId";
-    String ACC_CREATE_TIME = "crtTime";
-    String ACCOUNT = "account";
     String USR_AGE = "userage";
+    String PAGE_ID = "count";
+    String DRIVER_ID = "driver";
+    String BUS_ID = "bus";
+    String DIRECTION_ID = "route";
 }

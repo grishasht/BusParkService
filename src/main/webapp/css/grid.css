@@ -17,6 +17,15 @@ body {
     background-color: snow;
 }
 
+.bus-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: auto;
+    border: #9fcdff 1px inset;
+    border-radius: 7%;
+    background-color: snow;
+}
+
 .start-point {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -39,6 +48,7 @@ body {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row: 2;
+    color: #721c24;
 }
 
 .guest-body-instr {
@@ -51,20 +61,31 @@ body {
     grid-column-start: 2;
     grid-column-end: 3;
     width: 30%;
-    margin: auto;
+    margin: 5%;
     background-color: #b3d7ff;
     border-radius: 5%;
+}
+
+.pagin-form {
+    margin: auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
 }
 
 .admin-directions {
     grid-column-start: 1;
     grid-column-end: 2;
-
 }
 
-.admin-drivers {
-    grid-column-start: 2;
-    grid-column-end: 3;
+.admin-buses {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.bus-driver {
+    grid-column-start: 1;
+    grid-column-end: 3;;
 }
 
 .form-elem {
@@ -75,6 +96,10 @@ body {
     position: absolute;
     right: 0;
     margin-right: 10%;
+}
+
+.admin-body-form-marg {
+    margin: 5%;
 }
 
 .logout-right {

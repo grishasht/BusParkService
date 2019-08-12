@@ -1,14 +1,11 @@
 package model.service;
 
-import model.dao.Dao;
 import model.dao.DaoFactory;
 import model.dao.UserDao;
 import model.entity.User;
 import model.util.Constants;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -84,15 +81,6 @@ public class UserService {
         request.getSession().setAttribute(Constants.SESSION_USER, user);
     }
 
-    public void setResponse(int status, String message, HttpServletResponse response){
-        response.setStatus(status);
-        try {
-            response.getWriter().write(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private Boolean verifyLogin(String login, List<User> users) {
         return users.stream()
                 .anyMatch(user -> user.getLogin().equals(login));
@@ -120,8 +108,26 @@ public class UserService {
         return users.stream()
                 .filter(user -> user.getLogin().equals(login))
                 .findAny()
-                .get()
+                .orElse(User.getGuest())
                 .getId();
+    }
+
+    public List<User> getDrivers(){
+        return userDao.getDrivers();
+    }
+
+    public User readById(int id){
+        return userDao.readById(id);
+    }
+
+    public void setFree(Boolean isFree, User entity){
+        User user = new User();
+        user.setId(entity.getId());
+        user.setAge(entity.getAge());
+        user.setFree(isFree);
+        user.setName(entity.getName());
+
+        userDao.update(user);
     }
 
 }

@@ -54,7 +54,7 @@ public class BusJDBC extends JDBC implements BusDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in BusJDBC readAll");
 
                 while (resultSet.next()) {
-                    buses.add((Bus) busMapper.getEntity(resultSet, 1, 2, 3, 4, 5));
+                    buses.add((Bus) busMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in BusJDBC");
             }
@@ -68,10 +68,36 @@ public class BusJDBC extends JDBC implements BusDao {
     }
 
     @Override
+    public Bus readById(int id) {
+        Bus bus = null;
+        String query = "SELECT * FROM buses where id =" + id;
+        Mapper busMapper = new BusMapper();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in BusJDBC readByID");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in BusJDBC readById");
+
+                while (resultSet.next()) {
+                    bus = ((Bus) busMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in BusJDBC");
+            }
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in BusJDBC readByID");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in BusJDBC");
+        }
+
+        return bus;
+    }
+
+    @Override
     public void update(Bus entity) {
         String query = "UPDATE buses SET name = ?, number = ?, " +
-                "places_num = ?, is_free = ?" +
-                "WHERE id = " + entity.getId();
+                "places_num = ?, is_free = ?, driver_id = ?" +
+                " WHERE id = " + entity.getId();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -81,6 +107,7 @@ public class BusJDBC extends JDBC implements BusDao {
             preparedStatement.setString(2, entity.getNumber());
             preparedStatement.setInt(3, entity.getNumPlaces());
             preparedStatement.setBoolean(4, entity.getFree());
+            preparedStatement.setInt(5, entity.getUserId());
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in BusJDBC update");
@@ -104,6 +131,26 @@ public class BusJDBC extends JDBC implements BusDao {
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_DELETE") + "in BusJDBC");
         }
+    }
+
+    @Override
+    public Integer getMaxRows() {
+        int max = 0;
+        String query = "SELECT buses.*, row_number() OVER () as rnum " +
+                "FROM buses order by rnum desc limit 1";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    max = resultSet.getInt(7);
+                }
+            }
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in BusesDBC");
+        }
+
+        return max;
     }
 
     @Override

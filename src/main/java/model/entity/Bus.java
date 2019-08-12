@@ -7,6 +7,16 @@ public class Bus {
     private Integer numPlaces;
     private Boolean isFree;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    private Integer userId;
+
     public Integer getId() {
         return id;
     }

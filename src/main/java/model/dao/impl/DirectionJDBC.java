@@ -67,19 +67,41 @@ public class DirectionJDBC extends JDBC implements DirectionDao {
     }
 
     @Override
+    public Direction readById(int direction_id) {
+        Direction direction = null;
+        String query = "SELECT * FROM directions where id =" + direction_id;
+        Mapper directionMapper = new DirectionMapper();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in DirectionJDBC readByID");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in DirectionJDBC readById");
+
+                while (resultSet.next()) {
+                    direction = ((Direction) directionMapper.getEntity(resultSet, 1, 2, 3, 4, 5));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in DirectionJDBC");
+            }
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in DirectionJDBC readByID");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in DirectionJDBC");
+        }
+
+        return direction;
+    }
+
+    @Override
     public void update(Direction entity) {
-        String query = "UPDATE directions SET start_p = ?, end_p = ?, " +
-                "distance = ?, is_free = ?" +
+        String query = "UPDATE directions SET is_free = ?" +
                 "WHERE id = " + entity.getId();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in DirectionJDBC update");
 
-            preparedStatement.setString(1, entity.getStart());
-            preparedStatement.setString(2, entity.getEnd());
-            preparedStatement.setInt(3, entity.getDistance());
-            preparedStatement.setBoolean(4, entity.getIsFree());
+            preparedStatement.setBoolean(1, entity.getIsFree());
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in DirectionJDBC update");
@@ -103,6 +125,56 @@ public class DirectionJDBC extends JDBC implements DirectionDao {
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_DELETE") + "in DirectionJDBC");
         }
+    }
+
+    @Override
+    public Integer getMaxRows() {
+        int max = 0;
+        String query = "SELECT directions.*,\n" +
+                "       row_number() OVER () as rnum\n" +
+                "FROM directions order by rnum desc limit 1;";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    max = resultSet.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in DirectionJDBC");
+        }
+
+        return max;
+    }
+
+    @Override
+    public List<Direction> readFew(int num, int minVal) {
+        List<Direction> directions = new LinkedList<>();
+        String query = "select *\n" +
+                "from directions\n" +
+                "where id > " + minVal + " order by id\n" +
+                "limit " + num;
+        Mapper directionMapper = new DirectionMapper();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in DirectionJDBC readFew");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in DirectionJDBC readFew");
+
+                while (resultSet.next()) {
+                    directions.add((Direction) directionMapper.getEntity(resultSet, 1, 2, 3, 4, 5));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in DirectionJDBC");
+            }
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in DirectionJDBC readFew");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in DirectionJDBC");
+        }
+
+        return directions;
     }
 
     @Override
