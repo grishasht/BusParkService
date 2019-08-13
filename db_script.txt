@@ -1,0 +1,104 @@
+CREATE TABLE users
+(
+    id       SERIAL PRIMARY KEY,
+    login    VARCHAR(20) UNIQUE NOT NULL,
+    password VARCHAR(20)        NOT NULL,
+    name     VARCHAR(20)        NOT NULL,
+    email    VARCHAR(30)        NOT NULL,
+    role     VARCHAR(10)        NOT NULL,
+    age      INTEGER            NOT NULL,
+    is_free  BOOLEAN            NOT NULL
+);
+
+CREATE TABLE buses
+(
+    id         SERIAL PRIMARY KEY,
+    name       VARCHAR(30) NOT NULL,
+    number     VARCHAR(8)  NOT NULL UNIQUE,
+    places_num INTEGER     NOT NULL,
+    is_free    BOOLEAN     NOT NULL,
+    user_id    INTEGER     REFERENCES users(id)
+                ON UPDATE CASCADE
+                ON DELETE CASCADE
+);
+
+CREATE TABLE directions
+(
+    id       SERIAL PRIMARY KEY,
+    start_p  VARCHAR(20) NOT NULL,
+    end_p    VARCHAR(20) NOT NULL,
+    distance INTEGER     NOT NULL,
+    is_free  BOOLEAN     NOT NULL,
+    bus_id   INTEGER     REFERENCES buses(id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
+);
+
+CREATE TABLE requests
+(
+    id           SERIAL PRIMARY KEY,
+    user_id      INTEGER REFERENCES users (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    direction_id INTEGER REFERENCES directions (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    bus_id       INTEGER REFERENCES buses (id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    is_accept    BOOLEAN NOT NULL
+);
+
+INSERT INTO directions(start_p, end_p, distance, is_free)
+VALUES ('Kyiv', 'Chernivtsi', 550, true),
+       ('Kyiv', 'Khmelnytskyi', 450, true),
+       ('Kyiv', 'Zhytomyr', 200, true),
+       ('Zhytomyr', 'Chernivtsi', 550, true),
+       ('Zhytomyr', 'Lviv', 220, true),
+       ('Zhytomyr', 'Donetsk', 600, true),
+       ('Zhytomyr', 'Vinnytsiya', 245, true),
+       ('Donetsk', 'Dnipro', 300, true),
+       ('Donetsk', 'Lviv', 1200, true),
+       ('Dnipro', 'Zakarpatiya', 760, true),
+       ('Dnipro', 'Kryvyi Rih', 75, true),
+       ('Dnipro', 'Krym', 200, true),
+       ('Lviv', 'Krym', 980, true),
+       ('Lviv', 'Kremenchuk', 940, true),
+       ('Lviv', 'Volyn', 170, true),
+       ('Lviv', 'Odesa', 700, true),
+       ('Odesa', 'Kyiv', 400, true);
+
+INSERT INTO buses(name, number, places_num, is_free)
+VALUES ('Mercedes Sprinter', 'AB2324AX', 24, TRUE),
+       ('Mercedes Sprinter', 'AU4444BM', 24, TRUE),
+       ('Mercedes Sprinter', 'BB7546AX', 24, TRUE),
+       ('Mercedes Sprinter', 'AB1111CX', 24, TRUE),
+       ('Mercedes Sprinter', 'TB4781AX', 24, TRUE),
+       ('Mercedes Sprinter', 'CX5457DX', 24, TRUE),
+       ('Mercedes Sprinter', 'CX6321DX', 24, TRUE),
+       ('Mercedes Sprinter', 'CX6435DX', 24, TRUE),
+       ('Mercedes Neoplan', 'DH9886BC', 52, TRUE),
+       ('Mercedes Neoplan', 'BH5454BT', 52, TRUE),
+       ('Mercedes Neoplan', 'BH3412AT', 52, TRUE),
+       ('Mercedes Neoplan', 'BH9384AT', 52, TRUE),
+       ('Mercedes Neoplan', 'DH3456AC', 52, TRUE),
+       ('Mercedes Neoplan', 'AC8446CB', 52, TRUE),
+       ('Mercedes Neoplan', 'AC1597CB', 52, TRUE),
+       ('Mercedes Neoplan', 'DH1482CB', 52, TRUE),
+       ('Hyundai H350', 'AB1568TX', 28, TRUE),
+       ('Hyundai H350', 'TH5465TX', 28, TRUE),
+       ('Hyundai H350', 'TH7845CB', 28, TRUE),
+       ('Hyundai H350', 'TH7582CB', 28, TRUE),
+       ('Hyundai H350', 'AB1846CB', 28, TRUE),
+       ('Man Lions Coach', 'AC7546TI', 54, TRUE),
+       ('Man Lions Coach', 'BC4526TI', 54, TRUE),
+       ('Man Lions Coach', 'BC3254KE', 54, TRUE),
+       ('Man Lions Coach', 'HB6852KK', 54, TRUE),
+       ('Man Lions Coach', 'OH2486PK', 54, TRUE),
+       ('Man Lions Coach', 'HB2547PO', 54, TRUE),
+       ('Volvo 7900', 'AB3254PP', 46, TRUE),
+       ('Volvo 7900', 'KB6542PP', 46, TRUE),
+       ('Volvo 7900', 'KC4526OI', 46, TRUE),
+       ('Volvo 7900', 'BC1234OK', 46, TRUE),
+       ('Volvo 9500', 'EC4568TK', 46, TRUE),
+       ('Volvo 9500', 'ED2461CI', 46, TRUE),
+       ('Volvo 9500', 'KI1973CO', 46, TRUE);
+;
+
