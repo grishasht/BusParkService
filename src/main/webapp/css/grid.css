@@ -1,0 +1,138 @@
+.wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+}
+
+body {
+    background-color: #EEEEEF;
+}
+
+.dist-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: auto;
+    border: #9fcdff 1px inset;
+    border-radius: 7%;
+    background-color: snow;
+}
+
+.bus-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: auto;
+    border: #9fcdff 1px inset;
+    border-radius: 7%;
+    background-color: snow;
+}
+
+.start-point {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 1;
+}
+
+.end-point {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 2;
+}
+
+.distance {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 1;
+}
+
+.free {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row: 2;
+    color: #721c24;
+}
+
+.guest-body-instr {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin: 30% 20%;
+}
+
+.guest-body-login {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 30%;
+    margin: 5%;
+    background-color: #b3d7ff;
+    border-radius: 5%;
+}
+
+.pagin-form {
+    margin: auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+}
+
+.admin-directions {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.admin-buses {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.bus-driver {
+    grid-column-start: 1;
+    grid-column-end: 3;;
+}
+
+.form-elem {
+    margin: 5%;
+}
+
+.sign-up-right {
+    position: absolute;
+    right: 0;
+    margin-right: 10%;
+}
+
+.admin-body-form-marg {
+    margin: 5%;
+}
+
+.admin-new-req {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: auto;
+}
+
+.driver-form{
+    margin: 3%;
+    border: #9fcdff 1px solid;
+    border-radius: 7%;
+    background-color: #e2e6ea;
+}
+
+.driver-route {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.driver-bus {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.logout-right {
+    position: absolute;
+    right: 0;
+    margin-right: 25%;
+}
+
+.btn-size {
+    width: 45%;
+}

@@ -45,3 +45,4 @@ target/classes/lang_ru.properties
 target/classes/log4j.properties
 target/classes/log_msg.properties
 target/generated-sources/
+target/BusParkService/WEB-INF/driver/

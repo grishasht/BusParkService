@@ -1,0 +1,54 @@
+.wrap{
+    display: grid;
+    grid-template-columns: 30% 25% 30% 15%;
+    grid-auto-rows: auto;
+    border: #1a1f23 inset 1px;
+}
+
+.req-id{
+    border: #491217 inset 1px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    padding-left: 10%;
+}
+
+.req-address{
+    border: #491217 inset 1px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    padding-left: 10%;
+}
+
+.req-lug{
+    border: #491217 inset 1px;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    padding-left: 10%;
+}
+
+.buttons{
+    border: #491217 inset 1px;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.btn1-pos{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 7%;
+}
+
+.btn2-pos{
+    width: 80%;
+    margin-left: 10%;
+    float: bottom;
+    margin-top: 7%;
+}
