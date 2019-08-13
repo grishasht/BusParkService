@@ -78,11 +78,12 @@ public class RequestJDBC extends JDBC implements RequestDao {
                 + "b.places_num, "
                 + "d.start_p, "
                 + "d.end_p, "
-                + "d.distance "
+                + "d.distance, "
+                + "requests.is_accept "
                 + "from requests "
                 + "left join buses b on requests.bus_id = b.id "
                 + "left join directions d on requests.direction_id = d.id "
-                + "where user_id = 4";
+                + "where user_id =" + userId;
         Mapper requestMapper = new RequestMapper();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -92,7 +93,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC readByUserID");
 
                 while (resultSet.next()) {
-                    requests.add((Request) requestMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7));
+                    requests.add((Request) requestMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7, 8));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in RequestJDBC readByUserID");
             }
@@ -121,7 +122,27 @@ public class RequestJDBC extends JDBC implements RequestDao {
     }
 
     @Override
-    public void close() throws Exception {
+    public void setAccept(Integer id) {
+        String query = "UPDATE requests SET is_accept = ?" +
+                "WHERE id = " + id;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC setAccept");
+
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.execute();
+
+            log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in RequestJDBC setAccept");
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in RequestJDBC setAccept");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in RequestJDBC");
+        }
+    }
+
+    @Override
+    public void close() {
         try {
             connection.close();
             log.debug(properties.getProperty("CONN_CLOSE") + "in RequestJDBC");

@@ -18,6 +18,7 @@ public class RequestMapper implements Mapper<Request> {
             request.setStart(resultSet.getString(index[4]));
             request.setEnd(resultSet.getString(index[5]));
             request.setDistance(resultSet.getInt(index[6]));
+            request.setIsAccept(resultSet.getBoolean(index[7]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

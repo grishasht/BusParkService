@@ -33,7 +33,7 @@ public class UserJDBC extends JDBC implements UserDao {
             preparedStatement.setString(4, entity.getEmail());
             preparedStatement.setString(5, entity.getRole().toString());
             preparedStatement.setInt(6, entity.getAge());
-            preparedStatement.setBoolean(7, entity.getFree());
+            preparedStatement.setBoolean(7, true);
             preparedStatement.execute();
 
             log.info(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in UserJDBC creating");

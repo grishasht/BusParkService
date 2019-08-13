@@ -18,4 +18,8 @@ public class RequestService {
     public List<Request> getRequests(User user){
         return requestDao.readByUserId(user.getId());
     }
+
+    public void setAccepted(Integer reqId) {
+        requestDao.setAccept(reqId);
+    }
 }

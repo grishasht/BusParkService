@@ -18,4 +18,6 @@ public interface Constants {
     String DIRECTION = "direction_entity";
     String BUS = "bus_entity";
     String DRIVER = "driver_entity";
+    String REQ_ID = "reqId";
+    String REQ_ACCEPTED = "isAccept";
 }

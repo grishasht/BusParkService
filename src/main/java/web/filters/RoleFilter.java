@@ -26,6 +26,7 @@ public class RoleFilter implements Filter {
         Set<String> guestRef = new HashSet<>();
 
         adminRef.add("/");
+        adminRef.add("/reg_fwd");
         adminRef.add("/register");
         adminRef.add("/logout");
         adminRef.add("/manage_buses");
@@ -40,6 +41,7 @@ public class RoleFilter implements Filter {
         driverRef.add("/reg_fwd");
         driverRef.add("/register");
         driverRef.add("/logout");
+        driverRef.add("/accept_req");
 
         guestRef.add("/");
         guestRef.add("/login");
