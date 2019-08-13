@@ -16,6 +16,7 @@ public class DirectionMapper implements Mapper<Direction> {
             direction.setEnd(resultSet.getString(index[2]));
             direction.setDistance(resultSet.getInt(index[3]));
             direction.setIsFree(resultSet.getBoolean(index[4]));
+            direction.setBusId(resultSet.getInt(index[5]));
         } catch (SQLException e) {
             e.printStackTrace();
         }

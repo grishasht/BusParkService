@@ -6,6 +6,23 @@ public class Direction {
     private String start;
     private String end;
     private Boolean isFree;
+    private Integer busId;
+
+    public Integer getBusId() {
+        return busId;
+    }
+
+    public void setBusId(Integer busId) {
+        this.busId = busId;
+    }
+
+    public Boolean getFree() {
+        return isFree;
+    }
+
+    public void setFree(Boolean free) {
+        isFree = free;
+    }
 
     public Integer getId() {
         return id;

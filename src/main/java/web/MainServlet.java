@@ -31,6 +31,7 @@ public class MainServlet extends HttpServlet {
         commandMap.put("/buses/load_bs", new LoadBuses());
         commandMap.put("/buses/choose_driver", new ChooseDriver());
         commandMap.put("/routes/choose_bus", new ChooseBus());
+        commandMap.put("/create_req", new CreateReq());
 
         log.info("Servlet was initted");
         //getServletContext().setAttribute(USER_LIST, new LinkedList<User>());

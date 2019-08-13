@@ -2,11 +2,15 @@ package model.dao.impl;
 
 import model.dao.Dao;
 import model.dao.RequestDao;
+import model.dao.mappers.Mapper;
+import model.dao.mappers.RequestMapper;
 import model.entity.Request;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RequestJDBC extends JDBC implements RequestDao {
@@ -38,7 +42,7 @@ public class RequestJDBC extends JDBC implements RequestDao {
 
     @Override
     public List<Request> readAll() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -63,6 +67,42 @@ public class RequestJDBC extends JDBC implements RequestDao {
         } catch (SQLException e) {
             log.error(properties.getProperty("SQL_EXC_WHILE_UPDATE") + "in RequestJDBC");
         }
+    }
+
+    @Override
+    public List<Request> readByUserId(int userId) {
+        List<Request> requests = new LinkedList<>();
+        String query = "SELECT requests.id, "
+                + "b.name, "
+                + "b.number, "
+                + "b.places_num, "
+                + "d.start_p, "
+                + "d.end_p, "
+                + "d.distance "
+                + "from requests "
+                + "left join buses b on requests.bus_id = b.id "
+                + "left join directions d on requests.direction_id = d.id "
+                + "where user_id = 4";
+        Mapper requestMapper = new RequestMapper();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            log.debug(properties.getProperty("PREP_STAT_OPEN") + "in RequestJDBC readByUserID");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                log.debug(properties.getProperty("RES_SET_OPEN") + "in RequestJDBC readByUserID");
+
+                while (resultSet.next()) {
+                    requests.add((Request) requestMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6, 7));
+                }
+                log.debug(properties.getProperty("RES_SET_CLOSE") + "in RequestJDBC readByUserID");
+            }
+            log.debug(properties.getProperty("PREP_STAT_CLOSE") + "in RequestJDBC readByUserID");
+
+        } catch (SQLException e) {
+            log.error(properties.getProperty("SQL_EXC_WHILE_READ") + "in RequestJDBC");
+        }
+
+        return requests;
     }
 
     @Override

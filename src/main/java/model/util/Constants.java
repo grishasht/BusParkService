@@ -14,4 +14,8 @@ public interface Constants {
     String DRIVER_ID = "driver";
     String BUS_ID = "bus";
     String DIRECTION_ID = "route";
+    String CREATE_REQ = "create_req";
+    String DIRECTION = "direction_entity";
+    String BUS = "bus_entity";
+    String DRIVER = "driver_entity";
 }

@@ -28,7 +28,7 @@
                     <fmt:message key="error.smth.wrng.instr"/>
                 </div>
                 <div class="error-actions">
-                    <a href=href="${pageContext.request.contextPath}/page/"
+                    <a href="${pageContext.request.contextPath}/page/"
                        class="btn btn-default btn-lg"><span
                             class="glyphicon glyphicon-envelope"></span> <fmt:message key="error.go.home"/> </a>
                 </div>

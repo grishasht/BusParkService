@@ -53,7 +53,7 @@ public class DirectionJDBC extends JDBC implements DirectionDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in DirectionJDBC readAll");
 
                 while (resultSet.next()) {
-                    directions.add((Direction) directionMapper.getEntity(resultSet, 1, 2, 3, 4, 5));
+                    directions.add((Direction) directionMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in DirectionJDBC");
             }
@@ -79,7 +79,7 @@ public class DirectionJDBC extends JDBC implements DirectionDao {
                 log.debug(properties.getProperty("RES_SET_OPEN") + "in DirectionJDBC readById");
 
                 while (resultSet.next()) {
-                    direction = ((Direction) directionMapper.getEntity(resultSet, 1, 2, 3, 4, 5));
+                    direction = ((Direction) directionMapper.getEntity(resultSet, 1, 2, 3, 4, 5, 6));
                 }
                 log.debug(properties.getProperty("RES_SET_CLOSE") + "in DirectionJDBC");
             }
@@ -94,14 +94,15 @@ public class DirectionJDBC extends JDBC implements DirectionDao {
 
     @Override
     public void update(Direction entity) {
-        String query = "UPDATE directions SET is_free = ?" +
-                "WHERE id = " + entity.getId();
+        String query = "UPDATE directions SET is_free = ?, bus_id = ?"
+                + " WHERE id = " + entity.getId();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             log.debug(properties.getProperty("PREP_STAT_OPEN") + "in DirectionJDBC update");
 
             preparedStatement.setBoolean(1, entity.getIsFree());
+            preparedStatement.setInt(2, entity.getBusId());
             preparedStatement.execute();
 
             log.debug(properties.getProperty("SUCCESS_QUERY_EXECUTE") + "in DirectionJDBC update");
@@ -137,7 +138,7 @@ public class DirectionJDBC extends JDBC implements DirectionDao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    max = resultSet.getInt(1);
+                    max = resultSet.getInt(7);
                 }
             }
 
