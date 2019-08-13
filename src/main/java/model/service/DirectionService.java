@@ -1,18 +1,15 @@
 package model.service;
 
-import model.dao.Dao;
 import model.dao.DaoFactory;
 import model.dao.DirectionDao;
 import model.entity.Direction;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class DirectionService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private DirectionDao directionDao = daoFactory.createDirectionDao();
-    private Integer minVal = 0;
 
     public List<Direction> getDirections(){
         return directionDao.readAll();
@@ -56,7 +53,7 @@ public class DirectionService {
         Direction direction = new Direction();
         direction.setId(entity.getId());
         direction.setIsFree(isFree);
-
+        direction.setBusId(entity.getBusId());
 
         directionDao.update(direction);
     }

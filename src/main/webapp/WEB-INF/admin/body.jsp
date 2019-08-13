@@ -15,6 +15,7 @@
 <jsp:useBean id="getParams" class="java.lang.String"/>
 <jsp:useBean id="drctService" class="model.service.DirectionService"/>
 <jsp:useBean id="busService" class="model.service.BusService"/>
+<jsp:useBean id="userService" class="model.service.UserService"/>
 
 <c:set var="max_pages" value="${drctService.maxRows / 5 + 1}"/>
 <div style="display: none">
@@ -47,25 +48,40 @@
                             </c:if>
                         </div>
                     </div>
-                    <div class="chs-marsh input-group mb-3">
-                        <select class="custom-select" id="bus" name="bus">
-                            <option selected>Choose bus...</option>
-                            <c:forEach var="bus" items="${busService.buses}">
-                                <c:if test="${bus.free == false}">
-                                    <option value="${bus.id}">${bus.name}, ${bus.number}, ${bus.numPlaces}
-                                    <fmt:message key="body.places" bundle="${lang}"/></option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        <div class="input-group-append" style="height: 80%">
-                            <button class="btn btn-outline-secondary" type="submit"
-                                    name="route" value="${direction.id}"
-                                    formaction="${pageContext.request.contextPath}/page/routes/choose_bus?curLang=${sessionScope.curLang}">
-                                <fmt:message key="register.submit" bundle="${lang}"/>
-                            </button>
+                    <c:if test="${direction.free == true}">
+                        <div class="chs-marsh input-group mb-3">
+                            <select class="custom-select" id="bus" name="bus">
+                                <option selected>Choose bus...</option>
+                                <c:forEach var="bus" items="${busService.buses}">
+                                    <c:if test="${bus.free == false}">
+                                        <option value="${bus.id}">${bus.name}, ${bus.number}, ${bus.numPlaces}
+                                            <fmt:message key="body.places" bundle="${lang}"/></option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                            <div class="input-group-append" style="height: 80%">
+                                <button class="btn btn-outline-secondary" type="submit"
+                                        name="route" value="${direction.id}"
+                                        formaction="${pageContext.request.contextPath}/page/routes/choose_bus?curLang=${sessionScope.curLang}">
+                                    <fmt:message key="register.submit" bundle="${lang}"/>
+                                </button>
+                            </div>
+                        </div>
+                    </c:if>
+                </div>
+                <c:if test="${direction.free == false}">
+                    <div class="bus-driver">
+                        <div>
+                            <h5>
+                                <fmt:message key="body.form.bus" bundle="${lang}"/>
+                                    ${busService.readById(direction.busId).name},
+                                    ${busService.readById(direction.busId).number},
+                                    ${busService.readById(direction.busId).numPlaces}
+                                <fmt:message key="body.places" bundle="${lang}"/>
+                            </h5>
                         </div>
                     </div>
-                </div>
+                </c:if>
             </form>
         </c:forEach>
     </div>
@@ -110,4 +126,40 @@
             </ul>
         </nav>
     </div>
+
+    <c:if test="${sessionScope.create_req == true}">
+        <div class="admin-new-req guest-body-login" style="width: 60%">
+            <form method="post">
+                <div>
+                    <c:set var="route" value="${sessionScope.direction_entity}"/>
+                    <c:set var="bus" value="${sessionScope.bus_entity}"/>
+                    <c:set var="driver" value="${sessionScope.driver_entity}"/>
+                    <h4><fmt:message key="admin.new.req" bundle="${lang}"/></h4>
+                    <div class="start">
+                        <h5><fmt:message key="body.form.route" bundle="${lang}"/></h5>
+                        <fmt:message key="body.start.point" bundle="${lang}"/> ${route.start}<br>
+                        <fmt:message key="body.end.point" bundle="${lang}"/> ${route.end}<br>
+                        <fmt:message key="body.distance" bundle="${lang}"/> ${route.distance}<br>
+                        <h5><fmt:message key="body.form.bus" bundle="${lang}"/></h5>
+                        <fmt:message key="body.bus.model" bundle="${lang}"/> ${bus.name}<br>
+                        <fmt:message key="body.bus.number" bundle="${lang}"/> ${bus.number}<br>
+                        <h5><fmt:message key="bus.driver" bundle="${lang}"/></h5> ${driver.name}, ${driver.age}
+                        <fmt:message key="body.driver.age" bundle="${lang}"/><br>
+                    </div>
+                </div>
+                <div class="input-group-append" style="height: 80%">
+                    <button class="btn btn-primary form-elem" type="submit"
+                            name="route" value="${direction.id}"
+                            formaction="${pageContext.request.contextPath}/page/create_req?curLang=${sessionScope.curLang}">
+                        <fmt:message key="admin.form.accept" bundle="${lang}"/>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </c:if>
+    <c:if test="${sessionScope.create_req == false}">
+        <div class="admin-new-req">
+            <h2><fmt:message key="success.success" bundle="${lang}"/></h2>
+        </div>
+    </c:if>
 </div>

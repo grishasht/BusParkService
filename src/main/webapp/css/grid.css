@@ -102,6 +102,31 @@ body {
     margin: 5%;
 }
 
+.admin-new-req {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: auto;
+}
+
+.driver-form{
+    margin: 3%;
+    border: #9fcdff 1px solid;
+    border-radius: 7%;
+    background-color: #e2e6ea;
+}
+
+.driver-route {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.driver-bus {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
 .logout-right {
     position: absolute;
     right: 0;

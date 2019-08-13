@@ -33,6 +33,7 @@ public class RoleFilter implements Filter {
         adminRef.add("/buses/load_bs");
         adminRef.add("/buses/choose_driver");
         adminRef.add("/routes/choose_bus");
+        adminRef.add("/create_req");
 
 
         driverRef.add("/");

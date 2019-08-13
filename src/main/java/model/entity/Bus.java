@@ -6,6 +6,8 @@ public class Bus {
     private String number;
     private Integer numPlaces;
     private Boolean isFree;
+    private Integer userId;
+
 
     public Integer getUserId() {
         return userId;
@@ -14,8 +16,6 @@ public class Bus {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-
-    private Integer userId;
 
     public Integer getId() {
         return id;
